@@ -1,0 +1,1101 @@
+<?xml version="1.0"?>
+<testCase version="4.4.0.75339">
+    <procedures>
+        <item name="main">
+            <steps>
+                <item guid="4090a82d-4d9c-4ef2-922d-2dd84f3a17a4" action="open" session="stchlt">
+                    <command>
+                        <body>project://HLTAPI_sample/session_profiles/use_load_xml_with_hltapi.ffsp</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.OpenStepPropertyGroup">
+                        <stepProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        <sessionProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.svt.applications.spirent.testcenter.gui" transferableType="com.fnfr.itest.applications.spirent.testcenter.properties.TestCenterGUISessionProperties">
+                            <configureCustom16bitFilter transferableToolId="com.fnfr.svt.applications.spirent.testcenter.gui" transferableType="com.fnfr.itest.applications.spirent.testcenter.properties.Analyzer16BitFilterProperties" mask="ffff" mask.inherit="false" endOfRange="ffff" endOfRange.inherit="false"/>
+                        </sessionProperties>
+                        <sessionClass type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    </applicationProperties>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="29f6b41a-781b-4b72-aa48-c4c5add022d1" action="GetObjects" session="stchlt" skip="true">
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>status()</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="assert">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                        <expression>$value == 1</expression>
+                                        <actionsWhenTrue>
+                                            <item actionId="PassTestIfNotAlreadyFailed">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                    <message>run test_config successfully</message>
+                                                </actionProperties>
+                                            </item>
+                                        </actionsWhenTrue>
+                                        <actionsWhenFalse>
+                                            <item actionId="FailTest">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                    <message>run test_config failed</message>
+                                                </actionProperties>
+                                            </item>
+                                        </actionsWhenFalse>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.itest.platform2.shared.documents.ntaf.NtafTransferableDocumentObject" action="GetObjects" subharness="http://spirent.com/NTAF/harness/STC/4.20/Config" harness="http://spirent.com/NTAF/harness/STC/4.20/Main" harnessName="http://spirent.com/NTAF/harness/iTest/4.3/StcHltApi/Main" ClassName="&quot;&quot;" ClassName.inherit="false" Condition="&quot;&quot;" Condition.inherit="false"/>
+                </item>
+                <item guid="8e6dd1bf-a252-4e9f-9859-cd4d84e0924e" action="comment">
+                    <command>
+                        <body>config the parameters for optimization and parsing</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="e6e9cddb-9389-4132-9f05-f780ee32bf0b" action="test_control" session="stchlt">
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>status()</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="assert">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                        <expression>$value == 1</expression>
+                                        <actionsWhenTrue>
+                                            <item actionId="PassTestIfNotAlreadyFailed">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                    <message>run test_control successfully</message>
+                                                </actionProperties>
+                                            </item>
+                                        </actionsWhenTrue>
+                                        <actionsWhenFalse>
+                                            <item actionId="FailTest">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                    <message>run test_control failed</message>
+                                                </actionProperties>
+                                            </item>
+                                        </actionsWhenFalse>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.itest.platform2.shared.documents.ntaf.NtafTransferableDocumentObject" action="test_control" subharness="http://spirent.com/NTAF/harness/iTest/4.3/StcHltApi/Debug" harness="http://spirent.com/NTAF/harness/iTest/4.3/StcHltApi/Main" harnessName="http://spirent.com/NTAF/harness/iTest/4.3/StcHltApi/Main" action_arg="enable" action_arg.inherit="false"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="31278705-57ca-49af-8918-92b524c33071" action="comment">
+                    <command>
+                        <body>connect to chassis and reserve port list</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="d60ec6cc-536a-443f-9ca0-d03c01429e2c" action="connect" session="stchlt">
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>Port_10_1()</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="store">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                        <storageLocation>port1</storageLocation>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>Port_10_2()</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="store">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                        <storageLocation>port2</storageLocation>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>status()</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="assert">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                        <expression>$value == 1</expression>
+                                        <actionsWhenTrue>
+                                            <item actionId="PassTestIfNotAlreadyFailed">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                    <message>run connect successfully</message>
+                                                </actionProperties>
+                                            </item>
+                                        </actionsWhenTrue>
+                                        <actionsWhenFalse>
+                                            <item actionId="FailTest">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                    <message>run connect failed</message>
+                                                </actionProperties>
+                                            </item>
+                                        </actionsWhenFalse>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.itest.platform2.shared.documents.ntaf.NtafTransferableDocumentObject" action="connect" subharness="http://spirent.com/NTAF/harness/iTest/4.3/StcHltApi/Session" harness="http://spirent.com/NTAF/harness/iTest/4.3/StcHltApi/Main" harnessName="http://spirent.com/NTAF/harness/iTest/4.3/StcHltApi/Main" device="10.155.2.143" device.inherit="false" port_list="10/1 10/2" port_list.inherit="false" offline="1" offline.inherit="false" break_locks="1" break_locks.inherit="false"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="7e036015-ede9-4f9c-ad8d-187b35576787" action="interface_config" session="stchlt">
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>status()</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="assert">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                        <expression>$value == 1</expression>
+                                        <actionsWhenTrue>
+                                            <item actionId="PassTestIfNotAlreadyFailed">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                    <message>run interface_config successfully</message>
+                                                </actionProperties>
+                                            </item>
+                                        </actionsWhenTrue>
+                                        <actionsWhenFalse>
+                                            <item actionId="FailTest">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                    <message>run interface_config failed</message>
+                                                </actionProperties>
+                                            </item>
+                                        </actionsWhenFalse>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.itest.platform2.shared.documents.ntaf.NtafTransferableDocumentObject" action="interface_config" subharness="http://spirent.com/NTAF/harness/iTest/4.3/StcHltApi/Session" harness="http://spirent.com/NTAF/harness/iTest/4.3/StcHltApi/Main" harnessName="http://spirent.com/NTAF/harness/iTest/4.3/StcHltApi/Main" port_handle="$port1" port_handle.inherit="false" intf_mode="ethernet" intf_mode.inherit="false" enable_ping_response="0" enable_ping_response.inherit="false" phy_mode="fiber" phy_mode.inherit="false" port_mode="LAN" port_mode.inherit="false" speed="ether10000" speed.inherit="false" transmit_clock_source="INTERNAL" transmit_clock_source.inherit="false" scheduling_mode="RATE_BASED" scheduling_mode.inherit="false"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="6b9f93e4-bce5-4742-9703-edb4a7884537" action="interface_config" session="stchlt">
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>status()</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="assert">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                        <expression>$value == 1</expression>
+                                        <actionsWhenTrue>
+                                            <item actionId="PassTestIfNotAlreadyFailed">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                    <message>run interface_config successfully</message>
+                                                </actionProperties>
+                                            </item>
+                                        </actionsWhenTrue>
+                                        <actionsWhenFalse>
+                                            <item actionId="FailTest">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                    <message>run interface_config failed</message>
+                                                </actionProperties>
+                                            </item>
+                                        </actionsWhenFalse>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.itest.platform2.shared.documents.ntaf.NtafTransferableDocumentObject" action="interface_config" subharness="http://spirent.com/NTAF/harness/iTest/4.3/StcHltApi/Session" harness="http://spirent.com/NTAF/harness/iTest/4.3/StcHltApi/Main" harnessName="http://spirent.com/NTAF/harness/iTest/4.3/StcHltApi/Main" port_handle="$port2" port_handle.inherit="false" intf_mode="ethernet" intf_mode.inherit="false" enable_ping_response="0" enable_ping_response.inherit="false" phy_mode="fiber" phy_mode.inherit="false" port_mode="LAN" port_mode.inherit="false" speed="ether10000" speed.inherit="false" transmit_clock_source="INTERNAL" transmit_clock_source.inherit="false" scheduling_mode="RATE_BASED" scheduling_mode.inherit="false"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="579c66fd-775f-4116-a6a5-1b7415c0d05f" action="comment">
+                    <command>
+                        <body>start to create the device: DHCP Server</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="10820395-14e1-4ffd-968b-24874c5ce019" action="emulation_dhcp_server_config" session="stchlt">
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>dhcp_handle()</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="store">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                        <storageLocation>dhcp_server</storageLocation>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>dhcp_handle()</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="store">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                        <storageLocation>src_hdl</storageLocation>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>status()</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="assert">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                        <expression>$value == 1</expression>
+                                        <actionsWhenTrue>
+                                            <item actionId="PassTestIfNotAlreadyFailed">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                    <message>run emulation_dhcp_server_config successfully</message>
+                                                </actionProperties>
+                                            </item>
+                                        </actionsWhenTrue>
+                                        <actionsWhenFalse>
+                                            <item actionId="FailTest">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                    <message>run emulation_dhcp_server_config failed</message>
+                                                </actionProperties>
+                                            </item>
+                                        </actionsWhenFalse>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.itest.platform2.shared.documents.ntaf.NtafTransferableDocumentObject" action="emulation_dhcp_server_config" subharness="http://spirent.com/NTAF/harness/iTest/4.3/StcHltApi/DHCP_Server" harness="http://spirent.com/NTAF/harness/iTest/4.3/StcHltApi/Main" harnessName="http://spirent.com/NTAF/harness/iTest/4.3/StcHltApi/Main" port_handle="$port2" port_handle.inherit="false" mode="create" mode.inherit="false" encapsulation="ETHERNET_II_VLAN" encapsulation.inherit="false" local_mac="00:10:94:00:00:02" local_mac.inherit="false" ip_address="192.85.1.1" ip_address.inherit="false" ip_repeat="0" ip_repeat.inherit="false" ip_gateway="192.85.1.3" ip_gateway.inherit="false" ipaddress_pool="192.85.1.200" ipaddress_pool.inherit="false" ipaddress_count="55" ipaddress_count.inherit="false" vlan_id="200" vlan_id.inherit="false" vlan_id_step="0" vlan_id_step.inherit="false" vlan_user_priority="7" vlan_user_priority.inherit="false" vlan_outer_id_mode="increment" vlan_outer_id_mode.inherit="false" vlan_outer_id_step="0" vlan_outer_id_step.inherit="false" vlan_outer_user_priority="7" vlan_outer_user_priority.inherit="false" remote_mac="00:00:01:00:00:01" remote_mac.inherit="false"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="eab25a7a-9eac-4882-94c9-382bb390d6a1" action="comment">
+                    <command>
+                        <body>start to create the device: DHCP Subscriber</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="f3bc7cea-7f75-40c1-a234-038696b6d4d7" action="emulation_dhcp_config" session="stchlt">
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>status()</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="assert">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                        <expression>$value == 1</expression>
+                                        <actionsWhenTrue>
+                                            <item actionId="PassTestIfNotAlreadyFailed">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                    <message>run emulation_dhcp_config successfully</message>
+                                                </actionProperties>
+                                            </item>
+                                        </actionsWhenTrue>
+                                        <actionsWhenFalse>
+                                            <item actionId="FailTest">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                    <message>run emulation_dhcp_config failed</message>
+                                                </actionProperties>
+                                            </item>
+                                        </actionsWhenFalse>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>handles()</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="store">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                        <storageLocation>dhcp_handle</storageLocation>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.itest.platform2.shared.documents.ntaf.NtafTransferableDocumentObject" action="emulation_dhcp_config" subharness="http://spirent.com/NTAF/harness/iTest/4.3/StcHltApi/DHCP" harness="http://spirent.com/NTAF/harness/iTest/4.3/StcHltApi/Main" harnessName="http://spirent.com/NTAF/harness/iTest/4.3/StcHltApi/Main" port_handle="$port1" port_handle.inherit="false" mode="create" mode.inherit="false" lease_time="60" lease_time.inherit="false" msg_timeout="60000" msg_timeout.inherit="false" outstanding_session_count="1000" outstanding_session_count.inherit="false" release_rate="100" release_rate.inherit="false" request_rate="100" request_rate.inherit="false" retry_count="4" retry_count.inherit="false"/>
+                </item>
+                <item guid="44b4623c-ff79-4192-9ecf-e73b7c1feb4b" action="comment">
+                    <command>
+                        <body>Modify DHCP group</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="f45903db-7f0d-4963-b2aa-82658f430f57" action="emulation_dhcp_group_config" session="stchlt">
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>handles()</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="store">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                        <storageLocation>dhcp_grp_hnd</storageLocation>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>handle()</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="store">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                        <storageLocation>dst_hdl</storageLocation>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>status()</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="assert">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                        <expression>$value == 1</expression>
+                                        <actionsWhenTrue>
+                                            <item actionId="PassTestIfNotAlreadyFailed">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                    <message>run emulation_dhcp_group_config successfully</message>
+                                                </actionProperties>
+                                            </item>
+                                        </actionsWhenTrue>
+                                        <actionsWhenFalse>
+                                            <item actionId="FailTest">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                    <message>run emulation_dhcp_group_config failed</message>
+                                                </actionProperties>
+                                            </item>
+                                        </actionsWhenFalse>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.itest.platform2.shared.documents.ntaf.NtafTransferableDocumentObject" action="emulation_dhcp_group_config" subharness="http://spirent.com/NTAF/harness/iTest/4.3/StcHltApi/DHCP" harness="http://spirent.com/NTAF/harness/iTest/4.3/StcHltApi/Main" harnessName="http://spirent.com/NTAF/harness/iTest/4.3/StcHltApi/Main" mode="create" mode.inherit="false" handle="$dhcp_handle" handle.inherit="false" num_sessions="1" num_sessions.inherit="false" encap="ethernet_ii_vlan" encap.inherit="false" ipv4_gateway_address="192.85.1.1" ipv4_gateway_address.inherit="false" mac_addr="00:10:94:00:00:01" mac_addr.inherit="false" mac_addr_step="00:00:00:00:00:01" mac_addr_step.inherit="false" vlan_id="200" vlan_id.inherit="false" vlan_id_step.inherit="false" vlan_user_priority="7" vlan_user_priority.inherit="false" vlan_id_outer="100" vlan_id_outer.inherit="false" vlan_id_outer_step.inherit="false" vlan_outer_user_priority="7" vlan_outer_user_priority.inherit="false"/>
+                </item>
+                <item guid="63159cb2-7c16-4b1b-a92b-706d58ee8269" action="emulation_dhcp_group_config" session="stchlt">
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>status()</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="assert">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                        <expression>$value == 1</expression>
+                                        <actionsWhenTrue>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                    <message>run sth::emulation_dhcp_group_config successfully</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="PassTestIfNotAlreadyFailed">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                        </actionsWhenTrue>
+                                        <actionsWhenFalse>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                    <message>run sth::emulation_dhcp_group_config failed</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="FailTest">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                        </actionsWhenFalse>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.itest.platform2.shared.documents.ntaf.NtafTransferableDocumentObject" action="emulation_dhcp_group_config" subharness="http://spirent.com/NTAF/harness/iTest/4.3/StcHltApi/DHCP" harness="http://spirent.com/NTAF/harness/iTest/4.3/StcHltApi/Main" harnessName="http://spirent.com/NTAF/harness/iTest/4.3/StcHltApi/Main" mode="modify" mode.inherit="false" handle="$dhcp_grp_hnd" handle.inherit="false" num_sessions="1" num_sessions.inherit="false" encap="ethernet_ii_vlan" encap.inherit="false" ipv4_gateway_address="192.85.1.1" ipv4_gateway_address.inherit="false" mac_addr="00:10:94:11:01:01" mac_addr.inherit="false" mac_addr_step="00:00:00:11:00:01" mac_addr_step.inherit="false" vlan_id="200" vlan_id.inherit="false" vlan_user_priority="7" vlan_user_priority.inherit="false" vlan_id_outer="100" vlan_id_outer.inherit="false" vlan_outer_user_priority="7" vlan_outer_user_priority.inherit="false"/>
+                </item>
+                <item guid="f63e84ed-068b-467f-8dc0-d6355da6e370" action="comment">
+                    <command>
+                        <body>create traffic</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="ebb6ff54-10fc-43b9-bca6-4aac8e9f52df" action="traffic_config" session="stchlt">
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>status()</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="assert">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                        <expression>$value == 1</expression>
+                                        <actionsWhenTrue>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                    <message>run sth::traffic_config successfully</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="PassTestIfNotAlreadyFailed">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                        </actionsWhenTrue>
+                                        <actionsWhenFalse>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                    <message>run sth::traffic_config failed</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="FailTest">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                        </actionsWhenFalse>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.itest.platform2.shared.documents.ntaf.NtafTransferableDocumentObject" action="traffic_config" subharness="http://spirent.com/NTAF/harness/iTest/4.3/StcHltApi/Traffic" harness="http://spirent.com/NTAF/harness/iTest/4.3/StcHltApi/Main" harnessName="http://spirent.com/NTAF/harness/iTest/4.3/StcHltApi/Main" mode="create" mode.inherit="false" port_handle="$port2" port_handle.inherit="false" disable_signature="0" disable_signature.inherit="false" emulation_src_handle="$src_hdl" emulation_src_handle.inherit="false" emulation_dst_handle="$dst_hdl" emulation_dst_handle.inherit="false" fcs_error="0" fcs_error.inherit="false" fill_value="0" fill_value.inherit="false" l2_encap="ethernet_ii_vlan" l2_encap.inherit="false" mac_dst="00:00:01:00:00:01" mac_dst.inherit="false" mac_src="00:10:94:00:00:02" mac_src.inherit="false" length_mode="fixed" length_mode.inherit="false" vlan_outer_cfi="0" vlan_outer_cfi.inherit="false" vlan_id="200" vlan_id.inherit="false" vlan_user_priority="7" vlan_user_priority.inherit="false" vlan_id_outer="100" vlan_id_outer.inherit="false" vlan_outer_user_priority="7" vlan_outer_user_priority.inherit="false" l3_protocol="ipv4" l3_protocol.inherit="false" ip_precedence="6" ip_precedence.inherit="false" ip_ttl="255" ip_ttl.inherit="false" burst_loop_count="30" burst_loop_count.inherit="false" rate_bps="10" rate_bps.inherit="false" mac_discovery_gw="192.85.1.3" mac_discovery_gw.inherit="false" name="StreamBlock_3-3" name.inherit="false"/>
+                </item>
+                <item guid="6a8a7f7d-de8f-4cb5-a789-5c544f161da0" action="comment">
+                    <command>
+                        <body>start devices</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="9cf48288-d51e-4c7f-a059-750962b5b3de" action="emulation_dhcp_server_control" session="stchlt">
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>status()</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="assert">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                        <expression>$value == 1</expression>
+                                        <actionsWhenTrue>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                    <message>run sth::emulation_dhcp_server_control successfully</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="PassTestIfNotAlreadyFailed">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                        </actionsWhenTrue>
+                                        <actionsWhenFalse>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                    <message>run sth::emulation_dhcp_server_control failed</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="FailTest">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                        </actionsWhenFalse>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.itest.platform2.shared.documents.ntaf.NtafTransferableDocumentObject" action="emulation_dhcp_server_control" subharness="http://spirent.com/NTAF/harness/iTest/4.3/StcHltApi/DHCP_Server" harness="http://spirent.com/NTAF/harness/iTest/4.3/StcHltApi/Main" harnessName="http://spirent.com/NTAF/harness/iTest/4.3/StcHltApi/Main" action_arg="connect" action_arg.inherit="false" port_handle="$port2" port_handle.inherit="false"/>
+                </item>
+                <item guid="4b9a0b63-6ca8-44b5-8d90-c3787c78f89e" action="emulation_dhcp_control" session="stchlt">
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>status()</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="assert">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                        <expression>$value == 1</expression>
+                                        <actionsWhenTrue>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                    <message>run emulation_dhcp_control successfully</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="PassTestIfNotAlreadyFailed">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                        </actionsWhenTrue>
+                                        <actionsWhenFalse>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                    <message>run emulation_dhcp_control failed</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="FailTest">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                        </actionsWhenFalse>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.itest.platform2.shared.documents.ntaf.NtafTransferableDocumentObject" action="emulation_dhcp_control" subharness="http://spirent.com/NTAF/harness/iTest/4.3/StcHltApi/DHCP" harness="http://spirent.com/NTAF/harness/iTest/4.3/StcHltApi/Main" harnessName="http://spirent.com/NTAF/harness/iTest/4.3/StcHltApi/Main" port_handle="$port1" port_handle.inherit="false" action_arg="bind" action_arg.inherit="false"/>
+                </item>
+                <item guid="fb03107e-da97-4fa1-8333-83b18b44f396" action="sleep">
+                    <command>
+                        <body>5</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="84af716d-daa0-4021-b1d1-bf7d828ad9e0" action="comment">
+                    <command>
+                        <body>start traffic</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="4121c138-e1b1-4cd5-bf33-1a769959ba2e" action="traffic_control" session="stchlt">
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>status()</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="assert">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                        <expression>$value == 1</expression>
+                                        <actionsWhenTrue>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                    <message>run sth::traffic_control successfully</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="PassTestIfNotAlreadyFailed">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                        </actionsWhenTrue>
+                                        <actionsWhenFalse>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                    <message>run sth::traffic_control failed</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="FailTest">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                        </actionsWhenFalse>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.itest.platform2.shared.documents.ntaf.NtafTransferableDocumentObject" action="traffic_control" subharness="http://spirent.com/NTAF/harness/iTest/4.3/StcHltApi/Traffic" harness="http://spirent.com/NTAF/harness/iTest/4.3/StcHltApi/Main" harnessName="http://spirent.com/NTAF/harness/iTest/4.3/StcHltApi/Main" port_handle="$port2" port_handle.inherit="false" action_arg="run" action_arg.inherit="false"/>
+                </item>
+                <item guid="bec0b178-c3cd-4d65-bba3-9087854784d7" action="traffic_control" session="stchlt">
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>status()</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="assert">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                        <expression>$value == 1</expression>
+                                        <actionsWhenTrue>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                    <message>run sth::traffic_control successfully</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="PassTestIfNotAlreadyFailed">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                        </actionsWhenTrue>
+                                        <actionsWhenFalse>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                    <message>run sth::traffic_control failed</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="FailTest">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                        </actionsWhenFalse>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.itest.platform2.shared.documents.ntaf.NtafTransferableDocumentObject" action="traffic_control" subharness="http://spirent.com/NTAF/harness/iTest/4.3/StcHltApi/Traffic" harness="http://spirent.com/NTAF/harness/iTest/4.3/StcHltApi/Main" harnessName="http://spirent.com/NTAF/harness/iTest/4.3/StcHltApi/Main" port_handle="$port2" port_handle.inherit="false" action_arg="stop" action_arg.inherit="false"/>
+                </item>
+                <item guid="d01b8582-de45-4d36-99fe-93ad330e6bce" action="comment">
+                    <command>
+                        <body>start to get the device results</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="aecdd251-6106-4b00-9e33-d053a7718b90" action="emulation_dhcp_server_stats" session="stchlt">
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>status()</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="assert">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                        <expression>$value == 1</expression>
+                                        <actionsWhenTrue>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                    <message>run sth::emulation_dhcp_server_stats successfully</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="PassTestIfNotAlreadyFailed">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                        </actionsWhenTrue>
+                                        <actionsWhenFalse>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                    <message>run sth::emulation_dhcp_server_stats failed</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="FailTest">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                        </actionsWhenFalse>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.itest.platform2.shared.documents.ntaf.NtafTransferableDocumentObject" action="emulation_dhcp_server_stats" subharness="http://spirent.com/NTAF/harness/iTest/4.3/StcHltApi/DHCP_Server" harness="http://spirent.com/NTAF/harness/iTest/4.3/StcHltApi/Main" harnessName="http://spirent.com/NTAF/harness/iTest/4.3/StcHltApi/Main" action_arg="COLLECT" action_arg.inherit="false" port_handle="$port2" port_handle.inherit="false"/>
+                </item>
+                <item guid="b393739b-1414-4f00-9b5e-766f90b491e9" action="emulation_dhcp_stats" session="stchlt">
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>status()</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="assert">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                        <expression>$value == 1</expression>
+                                        <actionsWhenTrue>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                    <message>run sth::emulation_dhcp_stats successfully</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="PassTestIfNotAlreadyFailed">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                        </actionsWhenTrue>
+                                        <actionsWhenFalse>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                    <message>run sth::emulation_dhcp_stats failed</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="FailTest">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                        </actionsWhenFalse>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.itest.platform2.shared.documents.ntaf.NtafTransferableDocumentObject" action="emulation_dhcp_stats" subharness="http://spirent.com/NTAF/harness/iTest/4.3/StcHltApi/DHCP" harness="http://spirent.com/NTAF/harness/iTest/4.3/StcHltApi/Main" harnessName="http://spirent.com/NTAF/harness/iTest/4.3/StcHltApi/Main" port_handle="$port1" port_handle.inherit="false" mode="session" mode.inherit="false"/>
+                </item>
+                <item guid="5c5fbe13-5d34-4e0e-bfa0-1e67347f13dd" action="comment">
+                    <command>
+                        <body>Renew DHCP subscriber</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="8dca519c-a3fd-4dd4-a3b0-5e10a8c736b3" action="emulation_dhcp_control" session="stchlt">
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>status()</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="assert">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                        <expression>$value == 1</expression>
+                                        <actionsWhenTrue>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                    <message>run sth::emulation_dhcp_control successfully</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="PassTestIfNotAlreadyFailed">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                        </actionsWhenTrue>
+                                        <actionsWhenFalse>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                    <message>run sth::emulation_dhcp_control failed</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="FailTest">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                        </actionsWhenFalse>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.itest.platform2.shared.documents.ntaf.NtafTransferableDocumentObject" action="emulation_dhcp_control" subharness="http://spirent.com/NTAF/harness/iTest/4.3/StcHltApi/DHCP" harness="http://spirent.com/NTAF/harness/iTest/4.3/StcHltApi/Main" harnessName="http://spirent.com/NTAF/harness/iTest/4.3/StcHltApi/Main" port_handle="$port1" port_handle.inherit="false" action_arg="renew" action_arg.inherit="false"/>
+                </item>
+                <item guid="eb5abce5-fb86-4ef4-a61d-1a3f7979305d" action="sleep">
+                    <command>
+                        <body>5</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="78f64afd-4156-4bdf-ab4a-de9a4f2c10f6" action="emulation_dhcp_stats" session="stchlt">
+                    <applicationProperties type="com.fnfr.itest.platform2.shared.documents.ntaf.NtafTransferableDocumentObject" action="emulation_dhcp_stats" subharness="http://spirent.com/NTAF/harness/iTest/4.3/StcHltApi/DHCP" harness="http://spirent.com/NTAF/harness/iTest/4.3/StcHltApi/Main" harnessName="http://spirent.com/NTAF/harness/iTest/4.3/StcHltApi/Main" port_handle="$port1" port_handle.inherit="false" mode="session" mode.inherit="false"/>
+                </item>
+                <item guid="d60d047b-29f8-4c56-ba58-8eaee96d74d0" action="comment">
+                    <command>
+                        <body>Renew DHCP subscriber</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="2c204716-b739-4bea-a3ec-cbbe141b6819" action="emulation_dhcp_control" session="stchlt">
+                    <applicationProperties type="com.fnfr.itest.platform2.shared.documents.ntaf.NtafTransferableDocumentObject" action="emulation_dhcp_control" subharness="http://spirent.com/NTAF/harness/iTest/4.3/StcHltApi/DHCP" harness="http://spirent.com/NTAF/harness/iTest/4.3/StcHltApi/Main" harnessName="http://spirent.com/NTAF/harness/iTest/4.3/StcHltApi/Main" port_handle="$port1" port_handle.inherit="false" action_arg="bind" action_arg.inherit="false"/>
+                </item>
+                <item guid="a4d6ef54-cfc0-4d83-872a-9df30609a528" action="sleep">
+                    <command>
+                        <body>5</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="148a8b3e-1c06-4b8a-9120-9af9ee8af14d" action="emulation_dhcp_stats" session="stchlt">
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>status()</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="assert">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                        <expression>$value == 1</expression>
+                                        <actionsWhenTrue>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                    <message>run sth::emulation_dhcp_stats successfully</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="PassTestIfNotAlreadyFailed">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                        </actionsWhenTrue>
+                                        <actionsWhenFalse>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                    <message>run sth::emulation_dhcp_stats failed</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="FailTest">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                        </actionsWhenFalse>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.itest.platform2.shared.documents.ntaf.NtafTransferableDocumentObject" action="emulation_dhcp_stats" subharness="http://spirent.com/NTAF/harness/iTest/4.3/StcHltApi/DHCP" harness="http://spirent.com/NTAF/harness/iTest/4.3/StcHltApi/Main" harnessName="http://spirent.com/NTAF/harness/iTest/4.3/StcHltApi/Main" port_handle="$port1" port_handle.inherit="false" mode="session" mode.inherit="false"/>
+                </item>
+                <item guid="64a2e7e7-a9e2-4089-8db5-d9ea3c338b9b" action="comment">
+                    <command>
+                        <body>Renew DHCP subscriber</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="419ad589-913c-4b70-a472-71d2c2f017f9" action="emulation_dhcp_control" session="stchlt">
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>status()</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="assert">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                        <expression>$value == 1</expression>
+                                        <actionsWhenTrue>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                    <message>run sth::emulation_dhcp_control successfully</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="PassTestIfNotAlreadyFailed">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                        </actionsWhenTrue>
+                                        <actionsWhenFalse>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                    <message>run sth::emulation_dhcp_control failed</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="FailTest">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                        </actionsWhenFalse>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.itest.platform2.shared.documents.ntaf.NtafTransferableDocumentObject" action="emulation_dhcp_control" subharness="http://spirent.com/NTAF/harness/iTest/4.3/StcHltApi/DHCP" harness="http://spirent.com/NTAF/harness/iTest/4.3/StcHltApi/Main" harnessName="http://spirent.com/NTAF/harness/iTest/4.3/StcHltApi/Main" port_handle="$port1" port_handle.inherit="false" action_arg="release" action_arg.inherit="false"/>
+                </item>
+                <item guid="cdb67c43-1440-4478-9f4d-9bd95730e903" action="sleep">
+                    <command>
+                        <body>5</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="eae84305-2c00-42bc-9ca6-4465372883fa" action="emulation_dhcp_stats" session="stchlt">
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>status()</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="assert">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                        <expression>$value == 1</expression>
+                                        <actionsWhenTrue>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                    <message>run sth::emulation_dhcp_stats successfully</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="PassTestIfNotAlreadyFailed">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                        </actionsWhenTrue>
+                                        <actionsWhenFalse>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                    <message>run sth::emulation_dhcp_stats failed</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="FailTest">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                        </actionsWhenFalse>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.itest.platform2.shared.documents.ntaf.NtafTransferableDocumentObject" action="emulation_dhcp_stats" subharness="http://spirent.com/NTAF/harness/iTest/4.3/StcHltApi/DHCP" harness="http://spirent.com/NTAF/harness/iTest/4.3/StcHltApi/Main" harnessName="http://spirent.com/NTAF/harness/iTest/4.3/StcHltApi/Main" port_handle="$port1" port_handle.inherit="false" mode="session" mode.inherit="false"/>
+                </item>
+                <item guid="a5955899-cf76-4daf-8ede-71f2a1d9554d" action="comment">
+                    <command>
+                        <body>start to get the traffic results</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="f21ecda5-5942-4089-b146-19726b8c5117" action="traffic_stats" session="stchlt">
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>status()</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="assert">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                        <expression>$value == 1</expression>
+                                        <actionsWhenTrue>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                    <message>run sth::traffic_stats successfully</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="PassTestIfNotAlreadyFailed">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                        </actionsWhenTrue>
+                                        <actionsWhenFalse>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                    <message>run sth::traffic_stats failed</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="FailTest">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                        </actionsWhenFalse>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.itest.platform2.shared.documents.ntaf.NtafTransferableDocumentObject" action="traffic_stats" subharness="http://spirent.com/NTAF/harness/iTest/4.3/StcHltApi/Traffic" harness="http://spirent.com/NTAF/harness/iTest/4.3/StcHltApi/Main" harnessName="http://spirent.com/NTAF/harness/iTest/4.3/StcHltApi/Main" port_handle="$port1 $port2" port_handle.inherit="false" mode="all" mode.inherit="false"/>
+                </item>
+                <item guid="269fd7eb-f54b-4a6b-a034-f4da53cc36a8" action="comment">
+                    <command>
+                        <body>clean up the session, release the ports reserved and cleanup the dbfile</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="76c82afb-ee6b-4595-83c4-3a2432591239" action="cleanup_session" session="stchlt">
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>status()</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="assert">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                        <expression>$value == 1</expression>
+                                        <actionsWhenTrue>
+                                            <item actionId="PassTestIfNotAlreadyFailed">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                    <message>run cleanup_session successfully</message>
+                                                </actionProperties>
+                                            </item>
+                                        </actionsWhenTrue>
+                                        <actionsWhenFalse>
+                                            <item actionId="FailTest">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                    <message>run cleanup_session failed</message>
+                                                </actionProperties>
+                                            </item>
+                                        </actionsWhenFalse>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.itest.platform2.shared.documents.ntaf.NtafTransferableDocumentObject" action="cleanup_session" subharness="http://spirent.com/NTAF/harness/iTest/4.3/StcHltApi/Session" harness="http://spirent.com/NTAF/harness/iTest/4.3/StcHltApi/Main" harnessName="http://spirent.com/NTAF/harness/iTest/4.3/StcHltApi/Main" port_handle="$port1" port_handle.inherit="false"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="d4632e19-6b45-493b-9af0-c923b326ef17" action="close" session="stchlt">
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+        </item>
+    </procedures>
+</testCase>
